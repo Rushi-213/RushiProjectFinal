@@ -17,7 +17,7 @@ public class StudentDAO {
         Transaction tx = null;
 
         try (Session session =
-                HibernateUtil.getFactory().openSession()) {
+                HibernateUtil.getSessionFactory().openSession()) {
 
             tx = session.beginTransaction();
 
