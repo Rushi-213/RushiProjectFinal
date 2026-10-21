@@ -61,7 +61,7 @@ public class StudentDAO {
     public Student login(String email, String password) {
 
         try (Session session =
-                HibernateUtil.getFactory().openSession()) {
+                HibernateUtil.getSessionFactory().openSession()) {
 
             Query<Student> query = session.createQuery(
                 "from Student s where s.email = :email",
