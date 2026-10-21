@@ -6,29 +6,32 @@ import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
 
-    private static final SessionFactory factory =
+    private static final SessionFactory sessionFactory =
             buildSessionFactory();
 
     private static SessionFactory buildSessionFactory() {
-        try {
-            return new Configuration()
-                    .configure("hibernate.cfg.xml")
-                    .buildSessionFactory();
-        } catch (Throwable ex) {
-            System.err.println(
-                "Hibernate initialization failed: " + ex
-            );
-            throw new ExceptionInInitializerError(ex);
-        }
+        Configuration config = new Configuration();
+        config.configure("hibernate.cfg.xml");
+
+        config.setProperty(
+            "hibernate.connection.url",
+            System.getenv("DB_URL")
+        );
+
+        config.setProperty(
+            "hibernate.connection.username",
+            System.getenv("DB_USERNAME")
+        );
+
+        config.setProperty(
+            "hibernate.connection.password",
+            System.getenv("DB_PASSWORD")
+        );
+
+        return config.buildSessionFactory();
     }
 
-    public static SessionFactory getFactory() {
-        return factory;
-    }
-
-    public static void shutdown() {
-        if (factory != null && !factory.isClosed()) {
-            factory.close();
-        }
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
     }
 }
