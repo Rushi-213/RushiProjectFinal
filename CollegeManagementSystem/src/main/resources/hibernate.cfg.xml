@@ -1,22 +1,49 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "https://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
 <hibernate-configuration>
     <session-factory>
 
+        <!-- PostgreSQL Driver -->
         <property name="hibernate.connection.driver_class">
-            com.mysql.cj.jdbc.Driver
+            org.postgresql.Driver
         </property>
 
+        <!-- Render PostgreSQL Database -->
         <property name="hibernate.connection.url">
-            jdbc:mysql://localhost:3306/college_management?useSSL=false&amp;serverTimezone=UTC
+            ${DB_URL}
         </property>
 
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">Rushi@213</property>
+        <property name="hibernate.connection.username">
+            ${DB_USERNAME}
+        </property>
 
-        <property name="hibernate.hbm2ddl.auto">validate</property>
-        <property name="hibernate.show_sql">true</property>
-        <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.connection.password">
+            ${DB_PASSWORD}
+        </property>
 
+        <!-- Hibernate Dialect -->
+        <property name="hibernate.dialect">
+            org.hibernate.dialect.PostgreSQLDialect
+        </property>
+
+        <!-- Validate existing database tables -->
+        <property name="hibernate.hbm2ddl.auto">
+            validate
+        </property>
+
+        <property name="hibernate.show_sql">
+            true
+        </property>
+
+        <property name="hibernate.format_sql">
+            true
+        </property>
+
+        <!-- Entity Mapping -->
         <mapping class="com.college.model.Student"/>
 
     </session-factory>
