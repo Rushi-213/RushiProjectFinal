@@ -1,0 +1,6 @@
+com\college\util\HibernateUtil.class
+com\college\dao\StudentDAO.class
+com\college\model\Student.class
+com\college\servlet\LoginServlet.class
+com\college\servlet\LogoutServlet.class
+com\college\servlet\RegisterServlet.class
