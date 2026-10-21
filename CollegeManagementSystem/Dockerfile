@@ -8,10 +8,9 @@ COPY src ./src
 
 RUN mvn clean package -DskipTests
 
-# Stage 2: Run the WAR on Tomcat 10.1
+# Stage 2: Run the WAR on Tomcat
 FROM tomcat:10.1-jdk17-temurin
 
-# Allow Render to supply its required HTTP port
 RUN sed -i 's/port="8080"/port="${http.port}"/' /usr/local/tomcat/conf/server.xml
 
 ENV CATALINA_OPTS=""
